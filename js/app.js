@@ -34,6 +34,7 @@
         $log.debug("$ionicPlatform.ready begin");
         try {
           cor = cordova;
+          $scope.barcode = cor;
           $scope.messages.push("cor=" + (!!cor));
           $scope.messages.push("plugins=" + (!!(cor != null ? cor.plugins : void 0)));
           $scope.messages.push("barcodescanner=" + (!!(cor != null ? (ref = cor.plugins) != null ? ref.barcodescanner : void 0 : void 0)));
@@ -52,6 +53,7 @@
               }
             }
           }
+          $scope.messages.push("$cordovaBarcodeScanner=" + (!!$cordovaBarcodeScanner));
         } catch (error1) {
           error = error1;
           $scope.messages.push("Error: " + error);

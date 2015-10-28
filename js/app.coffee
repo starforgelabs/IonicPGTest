@@ -43,6 +43,7 @@ angular.module 'starter', ['ionic', 'ngCordova']
             $log.debug "$ionicPlatform.ready begin"
             try
                 cor = `cordova`
+                $scope.barcode = cor
                 $scope.messages.push "cor=" + (not not cor)
                 $scope.messages.push "plugins=" + (not not cor?.plugins)
                 $scope.messages.push "barcodescanner=" + (not not cor?.plugins?.barcodescanner)
@@ -54,6 +55,8 @@ angular.module 'starter', ['ionic', 'ngCordova']
                     $log.debug("promise catch")
                     $scope.error = error
                 )
+
+                $scope.messages.push  "$cordovaBarcodeScanner=" + (not not $cordovaBarcodeScanner)
             #                $cordovaBarcodeScanner.scan()
             #                .then (result) ->
             #                    $log.debug("promise then")
