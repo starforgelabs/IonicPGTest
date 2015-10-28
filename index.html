@@ -26,19 +26,36 @@
 
 <ion-pane>
     <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+        <h1 class="title">Basic Angular JS Test</h1>
+    </ion-header-bar>
+    <ion-content>
+        <h1>Value: {{value}}</h1>
+
+        <label for="testInput">Enter something:</label>
+        <input id="testInput" type="text" ng-model="value">
+
+        <h1>Error: {{error}}</h1>
+    </ion-content>
+</ion-pane>
+<ion-pane>
+    <ion-header-bar class="bar-stable">
+        <h1 class="title">Access Some Hardware Test</h1>
+    </ion-header-bar>
+    <ion-content>
+        <h1>Heading:</h1>
+
+        <p> {{heading | json}} </p>
+        <button ng-click="refreshHeading()">Refresh Heading</button>
+    </ion-content>
+</ion-pane>
+
+<ion-pane>
+    <ion-header-bar class="bar-stable">
+        <h1 class="title">Read a Barcode Test</h1>
     </ion-header-bar>
     <ion-content>
         <div>
-            <h1>Value: {{value}}</h1>
-            <label for="testInput">Enter something:</label>
-            <input id="testInput" type="text" ng-model="value">
-
-            <h1>Heading:</h1>
-
-            <p> {{heading | json}} </p>
-            <button ng-click="refreshHeading()">Refresh Heading</button>
-            <h1>Error: {{error}}</h1>
+            <button ng-click="">Todo</button>
         </div>
     </ion-content>
 </ion-pane>
