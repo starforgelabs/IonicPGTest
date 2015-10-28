@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
         });
     })
 
-    .controller(function ($scope, $ionicPlatform, $cordovaDeviceOrientation) {
+    .controller('testController', function ($scope, $ionicPlatform, $cordovaDeviceOrientation) {
         $ionicPlatform.ready(function () {
                 $cordovaDeviceOrientation.getCurrentHeading()
                     .then(function (result) {
