@@ -14,6 +14,7 @@
     </author>
 
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.2.7"/>
+    <gap:plugin name="org.apache.cordova.device-orientation"/>
 
     <preference name="phonegap-version" value="3.6.3" />
     <preference name="orientation"      value="default" />

@@ -22,7 +22,7 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" ng-controller="testController">
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
@@ -31,7 +31,10 @@
       <ion-content>
         <div>
           <h1>Value: {{value}}</h1>
-          <input type="text" ng-model="value">
+          <label for="testInput">Enter something:</label>
+          <input id="testInput" type="text" ng-model="value">
+          <h1>Heading:</h1>
+          <p> {{heading | json}} </p>
         </div>
       </ion-content>
     </ion-pane>
