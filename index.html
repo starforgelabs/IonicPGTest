@@ -67,6 +67,10 @@
                 <div>
                     <button ng-click="scanBarcode()">Scan Barcode</button>
                 </div>
+
+                <ol>
+                    <li ng-repeat="m  in messages">{{m}}</li>
+                </ol>
             </div>
         </div>
     </ion-content>

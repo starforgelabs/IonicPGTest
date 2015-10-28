@@ -19,6 +19,8 @@ angular.module 'starter', ['ionic', 'ngCordova']
                                $cordovaBarcodeScanner
                                $cordovaDeviceOrientation
                                $ionicPlatform) ->
+    $scope.messages = []
+
     $scope.refreshHeading = ->
         $log.debug "refreshHeading begin"
         $ionicPlatform.ready ->
@@ -39,12 +41,16 @@ angular.module 'starter', ['ionic', 'ngCordova']
         $log.debug "scanBarcode begin"
         $ionicPlatform.ready ->
             $log.debug "$ionicPlatform.ready begin"
-            $cordovaBarcodeScanner.scan()
-            .then (result) ->
-                $log.debug("promise then")
-                $scope.barcode = result
-            .catch (error) ->
-                $log.debug("promise catch")
+            try
+                $cordovaBarcodeScanner.scan()
+                .then (result) ->
+                    $log.debug("promise then")
+                    $scope.barcode = result
+                .catch (error) ->
+                    $log.debug("promise catch")
+                    $scope.error = error
+            catch error
+                $scope.messages.push "Error: " + error
                 $scope.error = error
 
             $log.debug("$ionicPlatform.ready end")
