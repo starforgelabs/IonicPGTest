@@ -35,6 +35,8 @@
           <input id="testInput" type="text" ng-model="value">
           <h1>Heading:</h1>
           <p> {{heading | json}} </p>
+            <button ng-click="refreshHeading()">Refresh Heading</button>
+            <h1>Error: {{error}}</h1>
         </div>
       </ion-content>
     </ion-pane>

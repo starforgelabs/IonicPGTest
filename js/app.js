@@ -18,14 +18,28 @@ angular.module('starter', ['ionic', 'ngCordova'])
         });
     })
 
-    .controller('testController', function ($scope, $ionicPlatform, $cordovaDeviceOrientation) {
-        $ionicPlatform.ready(function () {
-                $cordovaDeviceOrientation.getCurrentHeading()
-                    .then(function (result) {
-                        $scope.heading = result;
-                    }
-                )
-            }
-        );
+    .controller('testController', function ($log, $scope, $ionicPlatform, $cordovaDeviceOrientation) {
+        $scope.refreshHeading = function () {
+            $log.debug("refreshHeading begin");
+            $ionicPlatform.ready(function () {
+                    $log.debug("$ionicPlatform.ready begin");
+                    $cordovaDeviceOrientation.getCurrentHeading()
+                        .then(function (result) {
+                            $log.debug("promise then");
+                            $scope.heading = result;
+                        }
+                    ).catch(function (error) {
+                            $log.debug("promise catch");
+                            $scope.error = error;
+                        }
+                    )
+                    ;
+                    $log.debug("$ionicPlatform.ready end");
+                }
+            );
+            $log.debug("refreshHeading end");
+        };
+
+        $scope.refreshHeading();
     }
 );
