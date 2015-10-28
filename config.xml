@@ -15,7 +15,7 @@
 
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.2.7"/>
     <gap:plugin name="org.apache.cordova.device-orientation" version="0.3.9"/>
-    <!--
+    <!-- This is the wildabeast version
     <gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.2.0"/>
     -->
     <gap:plugin name="net.roughshod.plugins.barcodescanner" version="3.0.0" />

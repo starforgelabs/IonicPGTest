@@ -30,16 +30,28 @@
     return $scope.scanBarcode = function() {
       $log.debug("scanBarcode begin");
       $ionicPlatform.ready(function() {
-        var error, error1;
+        var cor, error, error1, ref, ref1, ref2;
         $log.debug("$ionicPlatform.ready begin");
         try {
-          $cordovaBarcodeScanner.scan().then(function(result) {
-            $log.debug("promise then");
-            return $scope.barcode = result;
-          }, function(error) {
-            $log.debug("promise catch");
-            return $scope.error = error;
-          });
+          cor = cordova;
+          $scope.messages.push("cor=" + (!!cor));
+          $scope.messages.push("plugins=" + (!!(cor != null ? cor.plugins : void 0)));
+          $scope.messages.push("barcodescanner=" + (!!(cor != null ? (ref = cor.plugins) != null ? ref.barcodescanner : void 0 : void 0)));
+          if (cor != null) {
+            if ((ref1 = cor.plugins) != null) {
+              if ((ref2 = ref1.barcodescanner) != null) {
+                if (typeof ref2.scan === "function") {
+                  ref2.scan(function(result) {
+                    $log.debug("promise then");
+                    return $scope.barcode = result;
+                  }, function(error) {
+                    $log.debug("promise catch");
+                    return $scope.error = error;
+                  });
+                }
+              }
+            }
+          }
         } catch (error1) {
           error = error1;
           $scope.messages.push("Error: " + error);
