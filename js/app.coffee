@@ -14,7 +14,11 @@ angular.module 'starter', ['ionic', 'ngCordova']
         if window.StatusBar
             StatusBar.styleDefault()
 
-.controller 'testController', ($log, $scope, $ionicPlatform, $cordovaDeviceOrientation) ->
+.controller 'testController', ($log, $scope,
+    #
+                               $cordovaBarcodeScanner
+                               $cordovaDeviceOrientation
+                               $ionicPlatform) ->
     $scope.refreshHeading = ->
         $log.debug "refreshHeading begin"
         $ionicPlatform.ready ->
@@ -30,3 +34,18 @@ angular.module 'starter', ['ionic', 'ngCordova']
             $log.debug("$ionicPlatform.ready end")
         $log.debug("refreshHeading end")
     $scope.refreshHeading()
+
+    $scope.scanBarcode = ->
+        $log.debug "scanBarcode begin"
+        $ionicPlatform.ready ->
+            $log.debug "$ionicPlatform.ready begin"
+            $cordovaBarcodeScanner.scan()
+            .then (result) ->
+                $log.debug("promise then")
+                $scope.barcode = result
+            .catch (error) ->
+                $log.debug("promise catch")
+                $scope.error = error
+
+            $log.debug("$ionicPlatform.ready end")
+        $log.debug("scanBarcode end")

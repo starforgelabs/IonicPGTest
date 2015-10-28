@@ -9,7 +9,7 @@
         return StatusBar.styleDefault();
       }
     });
-  }).controller('testController', function($log, $scope, $ionicPlatform, $cordovaDeviceOrientation) {
+  }).controller('testController', function($log, $scope, $cordovaBarcodeScanner, $cordovaDeviceOrientation, $ionicPlatform) {
     $scope.refreshHeading = function() {
       $log.debug("refreshHeading begin");
       $ionicPlatform.ready(function() {
@@ -25,7 +25,22 @@
       });
       return $log.debug("refreshHeading end");
     };
-    return $scope.refreshHeading();
+    $scope.refreshHeading();
+    return $scope.scanBarcode = function() {
+      $log.debug("scanBarcode begin");
+      $ionicPlatform.ready(function() {
+        $log.debug("$ionicPlatform.ready begin");
+        $cordovaBarcodeScanner.scan().then(function(result) {
+          $log.debug("promise then");
+          return $scope.barcode = result;
+        })["catch"](function(error) {
+          $log.debug("promise catch");
+          return $scope.error = error;
+        });
+        return $log.debug("$ionicPlatform.ready end");
+      });
+      return $log.debug("scanBarcode end");
+    };
   });
 
 }).call(this);
