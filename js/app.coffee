@@ -17,24 +17,22 @@ angular.module 'starter', ['ionic', 'ngCordova']
 .controller 'testController', ($log, $scope,
     #
                                $cordovaBarcodeScanner
+                               $cordovaBatteryStatus
                                $cordovaDeviceOrientation
                                $ionicPlatform) ->
     $scope.messages = []
+    $scope.battery =
+        level: "unknown"
+        isPlugged: "unknown"
 
     $scope.refreshHeading = ->
-        $log.debug "refreshHeading begin"
         $ionicPlatform.ready ->
-            $log.debug "$ionicPlatform.ready begin"
             $cordovaDeviceOrientation.getCurrentHeading()
             .then (result) ->
-                $log.debug("promise then")
                 $scope.heading = result
             .catch (error) ->
-                $log.debug("promise catch")
                 $scope.error = error
 
-            $log.debug("$ionicPlatform.ready end")
-        $log.debug("refreshHeading end")
     $scope.refreshHeading()
 
     $scope.scanBarcode = ->
@@ -56,7 +54,7 @@ angular.module 'starter', ['ionic', 'ngCordova']
                     $scope.error = error
                 )
 
-                $scope.messages.push  "$cordovaBarcodeScanner=" + (not not $cordovaBarcodeScanner)
+                $scope.messages.push "$cordovaBarcodeScanner=" + (not not $cordovaBarcodeScanner)
             #                $cordovaBarcodeScanner.scan()
             #                .then (result) ->
             #                    $log.debug("promise then")
@@ -70,3 +68,8 @@ angular.module 'starter', ['ionic', 'ngCordova']
 
             $log.debug("$ionicPlatform.ready end")
         $log.debug("scanBarcode end")
+
+    $ionicPlatform.ready ->
+        $scope.$on "$cordovaBatteryStatus:status", (result) ->
+            $scope.battery.level = result.level
+            $scope.battery.isPlugged = result.isPlugged

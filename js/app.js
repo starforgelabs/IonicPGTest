@@ -9,25 +9,23 @@
         return StatusBar.styleDefault();
       }
     });
-  }).controller('testController', function($log, $scope, $cordovaBarcodeScanner, $cordovaDeviceOrientation, $ionicPlatform) {
+  }).controller('testController', function($log, $scope, $cordovaBarcodeScanner, $cordovaBatteryStatus, $cordovaDeviceOrientation, $ionicPlatform) {
     $scope.messages = [];
+    $scope.battery = {
+      level: "unknown",
+      isPlugged: "unknown"
+    };
     $scope.refreshHeading = function() {
-      $log.debug("refreshHeading begin");
-      $ionicPlatform.ready(function() {
-        $log.debug("$ionicPlatform.ready begin");
-        $cordovaDeviceOrientation.getCurrentHeading().then(function(result) {
-          $log.debug("promise then");
+      return $ionicPlatform.ready(function() {
+        return $cordovaDeviceOrientation.getCurrentHeading().then(function(result) {
           return $scope.heading = result;
         })["catch"](function(error) {
-          $log.debug("promise catch");
           return $scope.error = error;
         });
-        return $log.debug("$ionicPlatform.ready end");
       });
-      return $log.debug("refreshHeading end");
     };
     $scope.refreshHeading();
-    return $scope.scanBarcode = function() {
+    $scope.scanBarcode = function() {
       $log.debug("scanBarcode begin");
       $ionicPlatform.ready(function() {
         var cor, error, error1, ref, ref1, ref2;
@@ -63,6 +61,12 @@
       });
       return $log.debug("scanBarcode end");
     };
+    return $ionicPlatform.ready(function() {
+      return $scope.$on("$cordovaBatteryStatus:status", function(result) {
+        $scope.battery.level = result.level;
+        return $scope.battery.isPlugged = result.isPlugged;
+      });
+    });
   });
 
 }).call(this);
