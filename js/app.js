@@ -36,7 +36,7 @@
           $cordovaBarcodeScanner.scan().then(function(result) {
             $log.debug("promise then");
             return $scope.barcode = result;
-          })["catch"](function(error) {
+          }, function(error) {
             $log.debug("promise catch");
             return $scope.error = error;
           });

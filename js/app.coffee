@@ -46,7 +46,7 @@ angular.module 'starter', ['ionic', 'ngCordova']
                 .then (result) ->
                     $log.debug("promise then")
                     $scope.barcode = result
-                .catch (error) ->
+                , (error) ->
                     $log.debug("promise catch")
                     $scope.error = error
             catch error
