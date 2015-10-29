@@ -24,6 +24,12 @@ angular.module 'starter', ['ionic', 'ngCordova']
     $scope.battery =
         level: "unknown"
         isPlugged: "unknown"
+    $scope.info =
+        isWebView: "unknown"
+        isIPad: "unknown"
+        isIOS: "unknown"
+        isAndroid: "unknown"
+        isWindowsPhone: "unknown"
 
     $scope.refreshHeading = ->
         $ionicPlatform.ready ->
@@ -68,6 +74,15 @@ angular.module 'starter', ['ionic', 'ngCordova']
 
             $log.debug("$ionicPlatform.ready end")
         $log.debug("scanBarcode end")
+
+    $ionicPlatform.ready ->
+        io = `ionic`
+        $scope.info =
+            isWebView: io.Platform.isWebView()
+            isIPad: io.Platform.isIPad()
+            isIOS: io.Platform.isIOS()
+            isAndroid: io.Platform.isAndroid()
+            isWindowsPhone: io.Platform.isWindowsPhone()
 
     $ionicPlatform.ready ->
         $scope.$on "$cordovaBatteryStatus:status", (result) ->

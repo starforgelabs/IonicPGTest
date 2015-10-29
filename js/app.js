@@ -15,6 +15,13 @@
       level: "unknown",
       isPlugged: "unknown"
     };
+    $scope.info = {
+      isWebView: "unknown",
+      isIPad: "unknown",
+      isIOS: "unknown",
+      isAndroid: "unknown",
+      isWindowsPhone: "unknown"
+    };
     $scope.refreshHeading = function() {
       return $ionicPlatform.ready(function() {
         return $cordovaDeviceOrientation.getCurrentHeading().then(function(result) {
@@ -61,6 +68,17 @@
       });
       return $log.debug("scanBarcode end");
     };
+    $ionicPlatform.ready(function() {
+      var io;
+      io = ionic;
+      return $scope.info = {
+        isWebView: io.Platform.isWebView(),
+        isIPad: io.Platform.isIPad(),
+        isIOS: io.Platform.isIOS(),
+        isAndroid: io.Platform.isAndroid(),
+        isWindowsPhone: io.Platform.isWindowsPhone()
+      };
+    });
     return $ionicPlatform.ready(function() {
       return $scope.$on("$cordovaBatteryStatus:status", function(result) {
         $scope.battery.level = result.level;
