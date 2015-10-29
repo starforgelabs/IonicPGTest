@@ -10,6 +10,7 @@
       }
     });
   }).controller('testController', function($log, $scope, $cordovaBarcodeScanner, $cordovaBatteryStatus, $cordovaDeviceOrientation, $ionicPlatform) {
+    var io, ref, ref1, ref2, ref3, ref4;
     $scope.messages = [];
     $scope.battery = {
       level: "unknown",
@@ -68,8 +69,17 @@
       });
       return $log.debug("scanBarcode end");
     };
+    io = ionic;
+    $scope.messages.push("controller main: " + (!!io));
+    $scope.info = {
+      isWebView: "controller  main: " + (io != null ? (ref = io.Platform) != null ? ref.isWebView() : void 0 : void 0),
+      isIPad: "controller  main: " + (io != null ? (ref1 = io.Platform) != null ? ref1.isIPad() : void 0 : void 0),
+      isIOS: "controller  main: " + (io != null ? (ref2 = io.Platform) != null ? ref2.isIOS() : void 0 : void 0),
+      isAndroid: "controller  main: " + (io != null ? (ref3 = io.Platform) != null ? ref3.isAndroid() : void 0 : void 0),
+      isWindowsPhone: "controller  main: " + (io != null ? (ref4 = io.Platform) != null ? ref4.isWindowsPhone() : void 0 : void 0)
+    };
     $ionicPlatform.ready(function() {
-      var io;
+      $scope.messages.push("controller main $ionicPlatform.ready fired.");
       io = ionic;
       return $scope.info = {
         isWebView: io.Platform.isWebView(),

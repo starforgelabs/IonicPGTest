@@ -75,7 +75,17 @@ angular.module 'starter', ['ionic', 'ngCordova']
             $log.debug("$ionicPlatform.ready end")
         $log.debug("scanBarcode end")
 
+    io = `ionic`
+    $scope.messages.push "controller main: " + (not not  io)
+    $scope.info =
+        isWebView: "controller  main: " + io?.Platform?.isWebView()
+        isIPad: "controller  main: " + io?.Platform?.isIPad()
+        isIOS: "controller  main: " + io?.Platform?.isIOS()
+        isAndroid: "controller  main: " + io?.Platform?.isAndroid()
+        isWindowsPhone: "controller  main: " + io?.Platform?.isWindowsPhone()
+
     $ionicPlatform.ready ->
+        $scope.messages.push "controller main $ionicPlatform.ready fired."
         io = `ionic`
         $scope.info =
             isWebView: io.Platform.isWebView()
